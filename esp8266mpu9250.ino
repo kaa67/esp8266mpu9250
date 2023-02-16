@@ -167,7 +167,7 @@ https://github.com/shubhampaul/Real_Time_Planet_Tracking_System/blob/master/MPU_
 
 // Using the MSENSR-9250 breakout board, ADO is set to 0 
 // Seven-bit device address is 110100 for ADO = 0 and 110101 for ADO = 1
-#define ADO 1
+#define ADO 0
 #if ADO
 #define MPU9250_ADDRESS 0x68  // Device address when ADO = 1
 #else
@@ -207,7 +207,7 @@ float aRes, gRes, mRes;      // scale resolutions per LSB for the sensors
   
 // Pin definitions
 int intPin = 12;  // These can be changed, 2 and 3 are the Arduinos ext int pins
-int myLed = 13; // Set up pin 13 led for toggling
+//int myLed = 13; // Set up pin 13 led for toggling
 
 int16_t accelCount[3];  // Stores the 16-bit signed accelerometer sensor output
 int16_t gyroCount[3];   // Stores the 16-bit signed gyro sensor output
@@ -256,8 +256,8 @@ void setup()
   // Set up the interrupt pin, its set as active high, push-pull
   pinMode(intPin, INPUT);
   digitalWrite(intPin, LOW);
-  pinMode(myLed, OUTPUT);
-  digitalWrite(myLed, HIGH);
+//  pinMode(myLed, OUTPUT);
+//  digitalWrite(myLed, HIGH);
   
 //  display.begin(); // Ini8ialize the display
 //  display.setContrast(58); // Set the contrast
@@ -477,7 +477,7 @@ void loop()
 //    display.display();
 //    
     count = millis();
-    digitalWrite(myLed, !digitalRead(myLed));  // toggle led
+//    digitalWrite(myLed, !digitalRead(myLed));  // toggle led
     }
     }
     else {
