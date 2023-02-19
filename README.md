@@ -1,2 +1,6 @@
-# esp8266mpu9250
-Gyro platform based on ESP8266 microcontroller, MPU-9250 nine-axis spatial sensor, A4988 drivers and 17HS4023 stepper motor
+# Gyro platform
+Based on:
+-- ESP8266 microcontroller
+-- MPU-6500 (without magnetAccelerator) six-axis spatial sensor
+-- A4988 stepMotor driver
+-- 17HS4023 stepper motor
