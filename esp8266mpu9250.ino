@@ -3,14 +3,18 @@
 #include "Driver.h"
 
 #define MPU6500_ADDR 0x68
+
 #define XDirectionPin D5
-#define YDirectionPin D7
 #define XStepPin D6
+#define XSpeedPin D3
+
+#define YDirectionPin D7
 #define YStepPin D8
+#define YSpeedPin D4
 
 MPU6500_WE myMPU6500 = MPU6500_WE(MPU6500_ADDR);
-Driver xDriver = Driver(XDirectionPin, XStepPin); // Управление драйвером первой оси
-Driver yDriver = Driver(YDirectionPin, YStepPin); // Управление драйвером второй оси
+Driver xDriver = Driver(XDirectionPin, XStepPin, XSpeedPin); // Управление драйвером первой оси
+Driver yDriver = Driver(YDirectionPin, YStepPin, YSpeedPin); // Управление драйвером второй оси
 
 void setup() {
   Serial.begin(115200);
@@ -56,5 +60,9 @@ void loop() {
   xDriver.step(gValue.x);
   yDriver.step(gValue.y);
 
-  delay(100);
+
+  delay(5);
+
+
+
 }

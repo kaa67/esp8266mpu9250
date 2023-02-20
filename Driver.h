@@ -6,12 +6,13 @@
 
 #define DEFAULT_STEP_TIME_INTERVAL 4
 #define DEFAULT_INITIAL_TARGET 0.0
-#define DEFAULT_HALF_DEAD_ZONE 0.01
+#define DEFAULT_HALF_DEAD_ZONE 0.2
 
 class Driver {
   private:
     int _directionPin; // пин для направления вращения степпера
     int _stepPin; // пин для шаговых сигналов степпера
+    int _speedPin; // выбор скорости, между полной и 1/4
 
     int _stepTimeInterval; // (ms) время между сменой уровня на пине шага
     unsigned long _lastStepTime; // (ms) врeмя последней операции смены шага
@@ -23,10 +24,10 @@ class Driver {
     void toggleStep();
 
   public: 
-    Driver(int directionPin, int stepPin);
-    Driver(int directionPin, int stepPin, int stepTimeInterval, float initialTarget, float halfDeadZone);
+    Driver(int directionPin, int stepPin, int _speedPin);
     void setTarget(float target);
     void step(float instantValue);
+    void setSpeed(int level);
 };
 
 #endif
