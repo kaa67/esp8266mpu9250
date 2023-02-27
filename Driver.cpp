@@ -1,10 +1,9 @@
 #include "Driver.h"
 
 Driver::Driver(int directionPin, int stepPin) {
-  _directionPin =     directionPin;
-  _stepPin =          stepPin;
+  _directionPin = directionPin;
+  _stepPin = stepPin;
   _stepsCounter = 0;
-
   pinMode(_directionPin, OUTPUT);
   pinMode(_stepPin, OUTPUT);
 }

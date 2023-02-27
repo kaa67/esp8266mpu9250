@@ -2,15 +2,17 @@
   #define HorizonZeroDown_h
 
   #include <Arduino.h>
-  #include "config.h"
+  #include <MPU6500_WE.h>
+
   #include "Driver.h"
-
-  Driver x = Driver(X_DIRECTION_PIN, X_STEP_PIN);
-  Driver y = Driver(Y_DIRECTION_PIN, Y_STEP_PIN);
-
+ 
   class HorizonZeroDown {
+    private:
+      Driver * _x;
+      Driver * _y;
+
     public: 
-      HorizonZeroDown();
+      HorizonZeroDown(Driver *, Driver *);
       bool isComplete();
       void start(xyzFloat);
   };

@@ -1,26 +1,24 @@
 #include "Observation.h"
 
-Observation::Observation() {
-  mpu6500.init();
-  mpu6500.setSampleRateDivider(5);
+Observation::Observation(MPU6500_WE * mpu6500) : _mpu(mpu6500) {
   counter = 0;
-  values.x = 0.f;
-  values.y = 0.f;
-  values.z = 0.f;
+  values.x = 0.0;
+  values.y = 0.0;
+  values.z = 0.0;
 }
 
 void Observation::start() {
   counter = OBSERVATION_COUNT;
-  values.x = 0.f;
-  values.y = 0.f;
-  values.z = 0.f;
+  values.x = 0.0;
+  values.y = 0.0;
+  values.z = 0.0;
 }
       
 bool Observation::isComplete() {
   if (counter < 1) return true;
 
   if (counter > 0) {
-    values += mpu6500.getGValues();
+    values += _mpu->getGValues();
   }
 
   counter--;
@@ -33,6 +31,5 @@ bool Observation::isComplete() {
 }
 
 xyzFloat Observation::getValues() {
-  xyzFloat temp{0.f, 0.f, 0.f};
-  return temp;
+  return _mpu->getGValues();
 }

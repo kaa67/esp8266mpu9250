@@ -3,18 +3,26 @@
 
 #include "SkipVibrations.h"
 #include "Observation.h"
+#include "Driver.h"
 #include "HorizonZeroDown.h"
 
-SkipVibrations skipVibrations = SkipVibrations();
-Observation observation = Observation();
-HorizonZeroDown horizonZeroDown = HorizonZeroDown();
+MPU6500_WE mpu6500 = MPU6500_WE(MPU6500_ADDR);
 
-enum { SKIP_VIBRATIONS, OBSERVATION, HORIZON_ZERO_DOWN } stage;
+Driver x = Driver(X_DIRECTION_PIN, X_STEP_PIN);
+Driver y = Driver(Y_DIRECTION_PIN, Y_STEP_PIN);
+
+SkipVibrations skipVibrations = SkipVibrations();
+Observation observation = Observation(& mpu6500);
+HorizonZeroDown horizonZeroDown = HorizonZeroDown(& x, & y);
+
+enum { START, SKIP_VIBRATIONS, OBSERVATION, HORIZON_ZERO_DOWN } stage;
 
 void setup() {
   Wire.begin();
-  skipVibrations.start();
-  stage = SKIP_VIBRATIONS;
+  mpu6500.init();
+  mpu6500.setSampleRateDivider(5);
+
+  stage = START;
 }
 
 void loop() {
@@ -27,12 +35,10 @@ void loop() {
       break;
     case OBSERVATION:
       if (observation.isComplete()) {
-        xyzFloat values = observation.getValues();
-        horizonZeroDown.start(values);
+        horizonZeroDown.start(observation.getValues());
         stage = HORIZON_ZERO_DOWN;
       }
       break;
-    case HORIZON_ZERO_DOWN:
     default:
       if (horizonZeroDown.isComplete()) {
         skipVibrations.start();
