@@ -10,6 +10,5 @@
     #define X_STEP_PIN D6
     #define Y_DIRECTION_PIN D7
     #define Y_STEP_PIN D8
-    #define DRIVER_STEP_TIME_INTERVAL 1
+    #define DRIVER_STEP_TIME_INTERVAL 750
 #endif
-

@@ -8,11 +8,13 @@ bool HorizonZeroDown::isComplete() {
 }
 
 void HorizonZeroDown::start(xyzFloat values) {
-  int xDirection = (values.x < 0) ? LOW : HIGH;
-  int yDirection = (values.y > 0) ? LOW : HIGH;
+  int xDirection = (values.x > 0) ? LOW : HIGH;
+  int yDirection = (values.y < 0) ? LOW : HIGH;
 
-  int xStepsCount = abs((int)(50. * values.x));
-  int yStepsCount = abs((int)(50. * values.x));
+  int xStepsCount = abs((int)(200. * values.x));
+  int yStepsCount = abs((int)(200. * values.y));
+//  int xStepsCount = 20;
+//  int yStepsCount = 20;
 
   _x->start(xDirection, xStepsCount);
   _y->start(yDirection, yStepsCount);

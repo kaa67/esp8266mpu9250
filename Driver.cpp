@@ -11,13 +11,13 @@ Driver::Driver(int directionPin, int stepPin) {
 void Driver::start(int direction, int stepsCount) {
   _stepsCounter = stepsCount;
   digitalWrite(_directionPin, direction);
-  _lastStepTime = millis();
+  _lastStepTime = micros();
 }
 
 bool Driver::isComplete() {
   if (_stepsCounter < 1) return true;
 
-  unsigned long realTime = millis();
+  unsigned long realTime = micros();
 
   if ((realTime - _lastStepTime) < DRIVER_STEP_TIME_INTERVAL) return false;
 
